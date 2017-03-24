@@ -71,9 +71,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/24/深拷贝与浅拷贝/">浅拷贝与深拷贝</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h1><h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><h3 id="深复制浅复制本质区别："><a href="#深复制浅复制本质区别：" class="headerlink" title="深复制浅复制本质区别："></a>深复制浅复制本质区别：</h3><ul>
+        <h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><h3 id="深复制浅复制本质区别："><a href="#深复制浅复制本质区别：" class="headerlink" title="深复制浅复制本质区别："></a>深复制浅复制本质区别：</h3><ul>
 <li>浅复制，源对象，新对象互相影响（修改新对象内容，源对象内容也会发生改变）</li>
 <li>深复制，源对象，新对象互不影响 (修改新对象内容，源对象内容不会发生改变)<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//浅复制</span></div><div class="line">- (<span class="keyword">void</span>)shadowCopy</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> arrayWithObjects:@<span class="number">1</span>,@<span class="number">2</span>,@<span class="number">3</span>, <span class="literal">nil</span>];</div><div class="line">    <span class="built_in">NSMutableArray</span> *arrayCopy = array;</div><div class="line">    [array addObject:@<span class="number">4</span>];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"array：%@"</span>,array);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"arrayCopy：%@"</span>,arrayCopy);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">//深复制</span></div><div class="line">- (<span class="keyword">void</span>)deepCopy</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> arrayWithObjects:@<span class="number">1</span>,@<span class="number">2</span>,@<span class="number">3</span>, <span class="literal">nil</span>];</div><div class="line">    <span class="built_in">NSMutableArray</span> *arrayCopy = [array <span class="keyword">copy</span>];</div><div class="line">    [array addObject:@<span class="number">4</span>];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"array：%@"</span>,array);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"arrayCopy：%@"</span>,arrayCopy);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
@@ -93,7 +103,7 @@ mutableCopy:返回一个可变副本
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/24/深拷贝与浅拷贝/" data-id="cj0o01o4k00018slu6pd7iktw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/24/深拷贝与浅拷贝/" data-id="cj0o053xa0002h0luh9ap01mu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -113,9 +123,19 @@ mutableCopy:返回一个可变副本
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/24/Hexo/">Hexo</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><h2 id="Hexo-是什么？"><a href="#Hexo-是什么？" class="headerlink" title="Hexo 是什么？"></a>Hexo 是什么？</h2><p>Hexo是一个快速，简单和强大的博客框架。 您在Markdown（或其他语言）中写文章，Hexo会在几秒钟内生成具有美丽主题的静态文件。</p>
+        <h2 id="Hexo-是什么？"><a href="#Hexo-是什么？" class="headerlink" title="Hexo 是什么？"></a>Hexo 是什么？</h2><p>Hexo是一个快速，简单和强大的博客框架。 您在Markdown（或其他语言）中写文章，Hexo会在几秒钟内生成具有美丽主题的静态文件。</p>
 <h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><p>安装Hexo很容易。 但是，您需要首先安装几个其他的东西：</p>
 <ul>
 <li><a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a> </li>
@@ -193,7 +213,7 @@ mutableCopy:返回一个可变副本
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/24/Hexo/" data-id="cj0o01o4l00028slu9qkj6e2o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/24/Hexo/" data-id="cj0o053ww0000h0luhypg7vik" class="article-share-link">Share</a>
       
       
     </footer>
@@ -238,7 +258,7 @@ mutableCopy:返回一个可变副本
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/24/hello-world/" data-id="cj0o01o4h00008slu8mjqwzwm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/24/hello-world/" data-id="cj0o053wz0001h0luhox0zxyv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -278,11 +298,11 @@ mutableCopy:返回一个可变副本
       <ul>
         
           <li>
-            <a href="/2017/03/24/深拷贝与浅拷贝/">(no title)</a>
+            <a href="/2017/03/24/深拷贝与浅拷贝/">浅拷贝与深拷贝</a>
           </li>
         
           <li>
-            <a href="/2017/03/24/Hexo/">(no title)</a>
+            <a href="/2017/03/24/Hexo/">Hexo</a>
           </li>
         
           <li>

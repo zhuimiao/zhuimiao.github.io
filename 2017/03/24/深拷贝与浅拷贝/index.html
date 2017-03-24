@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>浅拷贝与深拷贝 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="浅拷贝与深拷贝第一部分深复制浅复制本质区别：
+  <meta name="description" content="第一部分深复制浅复制本质区别：
 浅复制，源对象，新对象互相影响（修改新对象内容，源对象内容也会发生改变）
-深复制，源对象，新对象互不影响 (修改新对象内容，源对象内容不会发生改变)1234567891011121314151617181920//浅复制- (void)shadowCopy&amp;#123;    NSMutableArray *array = [NSMutableArray">
+深复制，源对象，新对象互不影响 (修改新对象内容，源对象内容不会发生改变)1234567891011121314151617181920//浅复制- (void)shadowCopy&amp;#123;    NSMutableArray *array = [NSMutableArray arrayW">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="浅拷贝与深拷贝">
 <meta property="og:url" content="http://yoursite.com/2017/03/24/深拷贝与浅拷贝/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="浅拷贝与深拷贝第一部分深复制浅复制本质区别：
+<meta property="og:description" content="第一部分深复制浅复制本质区别：
 浅复制，源对象，新对象互相影响（修改新对象内容，源对象内容也会发生改变）
-深复制，源对象，新对象互不影响 (修改新对象内容，源对象内容不会发生改变)1234567891011121314151617181920//浅复制- (void)shadowCopy&amp;#123;    NSMutableArray *array = [NSMutableArray">
-<meta property="og:updated_time" content="2017-03-24T15:46:12.362Z">
+深复制，源对象，新对象互不影响 (修改新对象内容，源对象内容不会发生改变)1234567891011121314151617181920//浅复制- (void)shadowCopy&amp;#123;    NSMutableArray *array = [NSMutableArray arrayW">
+<meta property="og:updated_time" content="2017-03-24T15:48:53.493Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="浅拷贝与深拷贝第一部分深复制浅复制本质区别：
+<meta name="twitter:title" content="浅拷贝与深拷贝">
+<meta name="twitter:description" content="第一部分深复制浅复制本质区别：
 浅复制，源对象，新对象互相影响（修改新对象内容，源对象内容也会发生改变）
-深复制，源对象，新对象互不影响 (修改新对象内容，源对象内容不会发生改变)1234567891011121314151617181920//浅复制- (void)shadowCopy&amp;#123;    NSMutableArray *array = [NSMutableArray">
+深复制，源对象，新对象互不影响 (修改新对象内容，源对象内容不会发生改变)1234567891011121314151617181920//浅复制- (void)shadowCopy&amp;#123;    NSMutableArray *array = [NSMutableArray arrayW">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -79,9 +79,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅拷贝与深拷贝
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h1><h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><h3 id="深复制浅复制本质区别："><a href="#深复制浅复制本质区别：" class="headerlink" title="深复制浅复制本质区别："></a>深复制浅复制本质区别：</h3><ul>
+        <h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><h3 id="深复制浅复制本质区别："><a href="#深复制浅复制本质区别：" class="headerlink" title="深复制浅复制本质区别："></a>深复制浅复制本质区别：</h3><ul>
 <li>浅复制，源对象，新对象互相影响（修改新对象内容，源对象内容也会发生改变）</li>
 <li>深复制，源对象，新对象互不影响 (修改新对象内容，源对象内容不会发生改变)<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//浅复制</span></div><div class="line">- (<span class="keyword">void</span>)shadowCopy</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> arrayWithObjects:@<span class="number">1</span>,@<span class="number">2</span>,@<span class="number">3</span>, <span class="literal">nil</span>];</div><div class="line">    <span class="built_in">NSMutableArray</span> *arrayCopy = array;</div><div class="line">    [array addObject:@<span class="number">4</span>];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"array：%@"</span>,array);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"arrayCopy：%@"</span>,arrayCopy);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">//深复制</span></div><div class="line">- (<span class="keyword">void</span>)deepCopy</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> arrayWithObjects:@<span class="number">1</span>,@<span class="number">2</span>,@<span class="number">3</span>, <span class="literal">nil</span>];</div><div class="line">    <span class="built_in">NSMutableArray</span> *arrayCopy = [array <span class="keyword">copy</span>];</div><div class="line">    [array addObject:@<span class="number">4</span>];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"array：%@"</span>,array);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"arrayCopy：%@"</span>,arrayCopy);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
@@ -101,7 +111,7 @@ mutableCopy:返回一个可变副本
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/24/深拷贝与浅拷贝/" data-id="cj0o01o4k00018slu6pd7iktw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/24/深拷贝与浅拷贝/" data-id="cj0o053xa0002h0luh9ap01mu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -113,7 +123,7 @@ mutableCopy:返回一个可变副本
   
     <a href="/2017/03/24/Hexo/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title"></div>
+      <div class="article-nav-title">Hexo</div>
     </a>
   
 </nav>
@@ -150,11 +160,11 @@ mutableCopy:返回一个可变副本
       <ul>
         
           <li>
-            <a href="/2017/03/24/深拷贝与浅拷贝/">(no title)</a>
+            <a href="/2017/03/24/深拷贝与浅拷贝/">浅拷贝与深拷贝</a>
           </li>
         
           <li>
-            <a href="/2017/03/24/Hexo/">(no title)</a>
+            <a href="/2017/03/24/Hexo/">Hexo</a>
           </li>
         
           <li>
