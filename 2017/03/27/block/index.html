@@ -87,22 +87,16 @@
 
 
 
-<meta name="description" content="如何修改block外部变量 | 使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题?
-在block内如何修改block外部变量？
-默认情况下，在block中访问的外部变量是复制过去的，即：写操作不对原变量生效。但是你可以加上 __block 来让其写操作生效，示例代码如下:123456__block int a = 0;   void (^foo)(">
+<meta name="description" content="如何修改block外部变量 | 使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="block">
 <meta property="og:url" content="http://yoursite.com/2017/03/27/block/index.html">
 <meta property="og:site_name" content="boitx">
-<meta property="og:description" content="如何修改block外部变量 | 使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题?
-在block内如何修改block外部变量？
-默认情况下，在block中访问的外部变量是复制过去的，即：写操作不对原变量生效。但是你可以加上 __block 来让其写操作生效，示例代码如下:123456__block int a = 0;   void (^foo)(">
-<meta property="og:updated_time" content="2017-03-26T17:43:45.451Z">
+<meta property="og:description" content="如何修改block外部变量 | 使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题?">
+<meta property="og:updated_time" content="2017-03-26T17:44:45.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="block">
-<meta name="twitter:description" content="如何修改block外部变量 | 使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题?
-在block内如何修改block外部变量？
-默认情况下，在block中访问的外部变量是复制过去的，即：写操作不对原变量生效。但是你可以加上 __block 来让其写操作生效，示例代码如下:123456__block int a = 0;   void (^foo)(">
+<meta name="twitter:description" content="如何修改block外部变量 | 使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题?">
 
 
 
@@ -327,7 +321,7 @@
       
 
       
-        <p>如何修改block外部变量 | 使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题?</p>
+        <p>如何修改block外部变量 | 使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题?<br><a id="more"></a></p>
 <h3 id="在block内如何修改block外部变量？"><a href="#在block内如何修改block外部变量？" class="headerlink" title="在block内如何修改block外部变量？"></a>在block内如何修改block外部变量？</h3><blockquote>
 <p>默认情况下，在block中访问的外部变量是复制过去的，即：写操作不对原变量生效。但是你可以加上 __block 来让其写操作生效，示例代码如下:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">__block <span class="keyword">int</span> a = <span class="number">0</span>;</div><div class="line">   <span class="keyword">void</span> (^foo)(<span class="keyword">void</span>) = ^&#123; </div><div class="line">       a = <span class="number">1</span>; </div><div class="line">   &#125;;</div><div class="line">   foo(); </div><div class="line">   <span class="comment">//这里，a的值被修改为1</span></div></pre></td></tr></table></figure></p>
 </blockquote>
