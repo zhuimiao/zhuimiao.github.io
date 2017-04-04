@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="通常建议，新语言的第一个程序应该是在屏幕上打印： “Hello, world!” 。 在Swift中，这可以在一行中完成： 
+
+1print(&quot;Hello, world!&quot;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Swift Tour">
+<meta property="og:url" content="http://yoursite.com/2017/04/04/A-Swift-Tour/index.html">
+<meta property="og:site_name" content="boitx">
+<meta property="og:description" content="通常建议，新语言的第一个程序应该是在屏幕上打印： “Hello, world!” 。 在Swift中，这可以在一行中完成： 
+
+1print(&quot;Hello, world!&quot;)">
+<meta property="og:updated_time" content="2017-04-03T16:49:41.014Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A Swift Tour">
+<meta name="twitter:description" content="通常建议，新语言的第一个程序应该是在屏幕上打印： “Hello, world!” 。 在Swift中，这可以在一行中完成： 
+
+1print(&quot;Hello, world!&quot;)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/04/A-Swift-Tour/"/>
+
+
+
+
+
+  <title> A Swift Tour | boitx </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">boitx</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">enjoy coding</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/04/A-Swift-Tour/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="boitx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="boitx">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                A Swift Tour
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-04T00:05:48+08:00">
+                2017-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>通常建议，新语言的第一个程序应该是在屏幕上打印： “Hello, world!” 。 在Swift中，这可以在一行中完成： </p>
+<blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">print</span>(<span class="string">"Hello, world!"</span>)</div></pre></td></tr></table></figure>
+</blockquote>
+<a id="more"></a>
+<p>如果你曾经使用 C 或 Objective-C 编写过代码，就一定会对这种 swift 语法很熟悉，这一行代码是一个完整的程序。 您不需要为输入/输出或字符串处理等功能导入单独的库。 全局作用域编写的代码用作程序的入口点，因此不需要 main（）函数。 您也不需要在每个语句的末尾写分号。</p>
+<p>本概述向您展示如何完成各种编程任务，为您开始在Swift中编写代码提供了足够的信息。 如果你看不懂一些东西，不要担心 - 这个概述中介绍的一切都在本书的其余部分中详细解释。</p>
+<blockquote>
+<p>小贴士<br>为了获得最佳体验，请在Xcode中以 playground 打开本章。 playground 允许您编辑代码列表并立即查看结果。</p>
+</blockquote>
+<h3 id="简单值"><a href="#简单值" class="headerlink" title="简单值"></a>简单值</h3><p>使用let定义一个常量和var来定义一个变量。 常量的值在编译时不需要知道，但是您必须为其赋一个值只能赋值一次。 这意味着您可以使用常亮来定义：决定一次，使用多次的值。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myVariable = <span class="number">42</span></div><div class="line">myVariable = <span class="number">50</span></div><div class="line"><span class="keyword">let</span> myConstant = <span class="number">42</span></div></pre></td></tr></table></figure></p>
+<p>常数或变量必须与要赋给它的值具有相同的类型。 但是，您并不总是必须明确地写入该类型。 在创建常量或变量时提供值可以让编译器推断其类型。 在上面的例子中，编译器推断myVariable是一个整数，因为它的初始值是一个整数。</p>
+<p>如果初始值没有提供足够的信息（或者没有初始值），则通过在变量之后写入该冒号来指定该类型。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> implicitInteger = <span class="number">70</span></div><div class="line"><span class="keyword">let</span> implicitDouble = <span class="number">70.0</span></div><div class="line"><span class="keyword">let</span> explicitDouble: <span class="type">Double</span> = <span class="number">70</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>尝试一下<br>创建一个具有显式类型的浮点数和值为4的常量。</p>
+</blockquote>
+<p>值不会隐式转换为其他类型。 如果需要将值转换为其他类型，请明确地创建所需类型的实例。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> label = <span class="string">"The width is "</span></div><div class="line"><span class="keyword">let</span> width = <span class="number">94</span></div><div class="line"><span class="keyword">let</span> widthLabel = label + <span class="type">String</span>(width)</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>尝试一下<br>尝试从最后一行删除转换为String。 你有什么错误？</p>
+</blockquote>
+<p>有一个更简单的方法来在字符串中包含值：将值写在括号中，并在括号之前写入反斜杠（\）。 例如：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> apples = <span class="number">3</span></div><div class="line"><span class="keyword">let</span> oranges = <span class="number">5</span></div><div class="line"><span class="keyword">let</span> appleSummary = <span class="string">"I have <span class="subst">\(apples)</span> apples."</span></div><div class="line"><span class="keyword">let</span> fruitSummary = <span class="string">"I have <span class="subst">\(apples + oranges)</span> pieces of fruit."</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>尝试一下<br>使用\（）在字符串中包含浮点计算，并在某个问候语中包含某人的名字。</p>
+</blockquote>
+<p>使用中括号（[]）创建数组和字典，并通过在中括号中写入 index 或 key 来访问它们的元素。最后一个元素后允许添加逗号。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> shoppingList = [<span class="string">"catfish"</span>, <span class="string">"water"</span>, <span class="string">"tulips"</span>, <span class="string">"blue paint"</span>]</div><div class="line">shoppingList[<span class="number">1</span>] = <span class="string">"bottle of water"</span></div><div class="line"> </div><div class="line"><span class="keyword">var</span> occupations = [</div><div class="line">    <span class="string">"Malcolm"</span>: <span class="string">"Captain"</span>,</div><div class="line">    <span class="string">"Kaylee"</span>: <span class="string">"Mechanic"</span>,</div><div class="line">]</div><div class="line">occupations[<span class="string">"Jayne"</span>] = <span class="string">"Public Relations"</span></div></pre></td></tr></table></figure></p>
+<p>要创建一个空数组或字典，请使用initializer语法。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> emptyArray = [<span class="type">String</span>]()</div><div class="line"><span class="keyword">let</span> emptyDictionary = [<span class="type">String</span>: <span class="type">Float</span>]()</div></pre></td></tr></table></figure></p>
+<p>如果可以推断出类型信息，则可以使用[]编写一个空数组或使用[：]编写一个空字典 - 例如，当为变量设置新值或将参数传递给函数时。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">shoppingList = []</div><div class="line">occupations = [:]</div></pre></td></tr></table></figure></p>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><p>使用if和switch来创建条件，并使用for-in，for，while和repeat-while来创建循环。 条件或循环变量周围的括号是可选的。 body周围的大括号是必须的。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> individualScores = [<span class="number">75</span>, <span class="number">43</span>, <span class="number">103</span>, <span class="number">87</span>, <span class="number">12</span>]</div><div class="line"><span class="keyword">var</span> teamScore = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> score <span class="keyword">in</span> individualScores &#123;</div><div class="line">    <span class="keyword">if</span> score &gt; <span class="number">50</span> &#123;</div><div class="line">        teamScore += <span class="number">3</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        teamScore += <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">print</span>(teamScore)</div></pre></td></tr></table></figure></p>
+<p>在一个if语句中，条件必须是一个布尔表达式 - 这意味着代码，如分数{…}是一个错误，而不是一个隐含的比较为零。</p>
+<p>您可以使用if和let一起处理可能丢失的值。 这些值表示为可选项。 一个可选值包含一个值，或者包含一个nil，表示一个值丢失。 在一个值的类型之后写一个问号（？），以将值标记为可选。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> optionalString: <span class="type">String</span>? = <span class="string">"Hello"</span></div><div class="line"><span class="built_in">print</span>(optionalString == <span class="literal">nil</span>)</div><div class="line"> </div><div class="line"><span class="keyword">var</span> optionalName: <span class="type">String</span>? = <span class="string">"John Appleseed"</span></div><div class="line"><span class="keyword">var</span> greeting = <span class="string">"Hello!"</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> name = optionalName &#123;</div><div class="line">    greeting = <span class="string">"Hello, <span class="subst">\(name)</span>"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>尝试一下<br>将optionalName更改为nil。 你得到什么问候？ 添加一个else子句，如果optionalName为nil则设置不同的问候语。</p>
+</blockquote>
+<p>如果可选值为nil，则条件为false，并且跳过大括号中的代码。 否则，可选值被解包并分配给let之后的常量，这使得代码块内的解包值可用。</p>
+<p>处理可选值的另一种方法是使用?? 操作符。 如果缺少可选值，则使用默认值。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> nickName: <span class="type">String</span>? = <span class="literal">nil</span></div><div class="line"><span class="keyword">let</span> fullName: <span class="type">String</span> = <span class="string">"John Appleseed"</span></div><div class="line"><span class="keyword">let</span> informalGreeting = <span class="string">"Hi <span class="subst">\(nickName ?? fullName)</span>"</span></div></pre></td></tr></table></figure></p>
+<p>Switches 支持任何类型的数据和各种比较操作 - 它们不限于整数和相等测试。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">let vegetable = <span class="string">"red pepper"</span></div><div class="line"><span class="keyword">switch</span> vegetable &#123;</div><div class="line"><span class="keyword">case</span> <span class="string">"celery"</span>:</div><div class="line">    print(<span class="string">"Add some raisins and make ants on a log."</span>)</div><div class="line"><span class="keyword">case</span> <span class="string">"cucumber"</span>, <span class="string">"watercress"</span>:</div><div class="line">    print(<span class="string">"That would make a good tea sandwich."</span>)</div><div class="line"><span class="keyword">case</span> let x where x.hasSuffix(<span class="string">"pepper"</span>):</div><div class="line">    print(<span class="string">"Is it a spicy \(x)?"</span>)</div><div class="line"><span class="keyword">default</span>:</div><div class="line">    print(<span class="string">"Everything tastes good in soup."</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>尝试一下<br>尝试删除默认情况。 你有什么错误？</p>
+</blockquote>
+<p>请注意，如何使用let来将匹配的值分配给常量。</p>
+<p>在匹配的Switches中执行代码后，程序退出switch语句。 执行不会继续下一种情况，因此在每个 case 的代码结尾处不需写 break。</p>
+<p>您可以使用for-in通过提供一对用于每个键值对的名称来迭代字典中的条目。 词典是一个无序的集合，所以它们的键和值以任意的顺序迭代。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> interestingNumbers = [</div><div class="line">    <span class="string">"Prime"</span>: [<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>],</div><div class="line">    <span class="string">"Fibonacci"</span>: [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>],</div><div class="line">    <span class="string">"Square"</span>: [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>],</div><div class="line">]</div><div class="line"><span class="keyword">var</span> largest = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> (kind, numbers) <span class="keyword">in</span> interestingNumbers &#123;</div><div class="line">    <span class="keyword">for</span> number <span class="keyword">in</span> numbers &#123;</div><div class="line">        <span class="keyword">if</span> number &gt; largest &#123;</div><div class="line">            largest = number</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">print</span>(largest)</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>尝试一下<br>添加另一个变量来跟踪哪种类型的数字是最大的数字，以及最大的数字。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/04/about-swift/" rel="next" title="about swift">
+                <i class="fa fa-chevron-left"></i> about swift
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="boitx" />
+          <p class="site-author-name" itemprop="name">boitx</p>
+           
+              <p class="site-description motion-element" itemprop="description">没有技术的宅，就是不要脸</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单值"><span class="nav-number">1.</span> <span class="nav-text">简单值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程控制"><span class="nav-number">2.</span> <span class="nav-text">流程控制</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">boitx</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
