@@ -1,0 +1,729 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="注意：这是 Objective-C ReactiveCocoa 的传统介绍，现在称为 ReactiveObjC。 对于使用 Swift 的更新版本，请参阅ReactiveCocoa或ReactiveSwift
+ReactiveObjC（正式的名称 ReactiveCocoa 或 RAC）是由函数响应式编程启发的Objective-C框架。 它提供用于编写和转换流媒体值的API。
+如果您已经熟悉了函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactiveObjC">
+<meta property="og:url" content="http://yoursite.com/2017/04/04/ReactiveObjC/index.html">
+<meta property="og:site_name" content="boitx">
+<meta property="og:description" content="注意：这是 Objective-C ReactiveCocoa 的传统介绍，现在称为 ReactiveObjC。 对于使用 Swift 的更新版本，请参阅ReactiveCocoa或ReactiveSwift
+ReactiveObjC（正式的名称 ReactiveCocoa 或 RAC）是由函数响应式编程启发的Objective-C框架。 它提供用于编写和转换流媒体值的API。
+如果您已经熟悉了函">
+<meta property="og:updated_time" content="2017-04-04T17:55:55.258Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactiveObjC">
+<meta name="twitter:description" content="注意：这是 Objective-C ReactiveCocoa 的传统介绍，现在称为 ReactiveObjC。 对于使用 Swift 的更新版本，请参阅ReactiveCocoa或ReactiveSwift
+ReactiveObjC（正式的名称 ReactiveCocoa 或 RAC）是由函数响应式编程启发的Objective-C框架。 它提供用于编写和转换流媒体值的API。
+如果您已经熟悉了函">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/04/ReactiveObjC/"/>
+
+
+
+
+
+  <title> ReactiveObjC | boitx </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">boitx</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">enjoy coding</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/04/ReactiveObjC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="boitx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="boitx">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ReactiveObjC
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-04T18:24:04+08:00">
+                2017-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>注意：这是 Objective-C ReactiveCocoa 的传统介绍，现在称为 ReactiveObjC。 对于使用 Swift 的更新版本，请参阅ReactiveCocoa或ReactiveSwift</p>
+<p>ReactiveObjC（正式的名称 ReactiveCocoa 或 RAC）是由函数响应式编程启发的Objective-C框架。 它提供用于编写和转换流媒体值的API。</p>
+<p>如果您已经熟悉了函数响应式编程，或者了解了ReactiveObjC的基本前提，请查看此文件夹中的其他文档以了解框架概述，以及有关在实践中如何运行的更深入的信息。<br><a id="more"></a></p>
+<p>ReactiveObjC 新手？</p>
+<p>ReactiveObjC 被记录为疯狂，有大量介绍性材料可用于解释RAC是什么以及如何使用它。</p>
+<p>如果您想了解更多，我们推荐这些资源，大致顺序如下：</p>
+<ol>
+<li>介绍</li>
+<li>何时使用ReactiveObjC</li>
+<li>框架概述</li>
+<li>基本操作</li>
+<li>Header documentation</li>
+<li>Previously answered Stack Overflow questions and GitHub issues</li>
+<li>这个文件夹的其余部分</li>
+<li>iOS上的函数响应式编程（eBook）</li>
+<li>如果您有任何其他问题，请随时提出问题。<br>###介绍<br>ReactiveObjC的灵感来自函数响应式编。 RAC提供的信号（由RACSignal表示）可以捕获当前和未来的值，而不是使用被替换和修改的可变变量。</li>
+</ol>
+<p>通过链接，组合和响应信号，软件可以声明性地编写，而不需要持续观察和更新值的代码。</p>
+<p>例如，文本字段可以绑定到最新的时间，即使它改变了，而不是使用附加的代码来监视时钟并且每秒更新文本字段。它非常像KVO，但是使用块而不是重写方法-observeValueForKeyPath：ofObject：change：context：。</p>
+<p>信号也可以处理异步操作，非常像期货和承诺。这极大地简化了异步软件，包括网络代码。</p>
+<p>RAC的主要优点之一是它提供了一种单一的统一方法来处理异步行为，包括委托方法，回调块，目标动作机制，通知和KVO。</p>
+<p>这是一个简单的例子<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// When self.username changes, logs the new name to the console.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// RACObserve(self, username) creates a new RACSignal that sends the current</span></div><div class="line"><span class="comment">// value of self.username, then the new value whenever it changes.</span></div><div class="line"><span class="comment">// -subscribeNext: will execute the block whenever the signal sends a value.</span></div><div class="line">[RACObserve(<span class="keyword">self</span>, username) subscribeNext:^(<span class="built_in">NSString</span> *newName) &#123;</div><div class="line">	<span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, newName);</div><div class="line">&#125;];</div></pre></td></tr></table></figure></p>
+<p>但与KVO通知不同，信号可以链接在一起执行：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Only logs names that starts with "j".</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// -filter returns a new RACSignal that only sends a new value when its block</span></div><div class="line"><span class="comment">// returns YES.</span></div><div class="line">[[RACObserve(<span class="keyword">self</span>, username)</div><div class="line">	filter:^(<span class="built_in">NSString</span> *newName) &#123;</div><div class="line">		<span class="keyword">return</span> [newName hasPrefix:<span class="string">@"j"</span>];</div><div class="line">	&#125;]</div><div class="line">	subscribeNext:^(<span class="built_in">NSString</span> *newName) &#123;</div><div class="line">		<span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, newName);</div><div class="line">	&#125;];</div></pre></td></tr></table></figure></p>
+<p>信号也可以用来设置状态。 RAC不需要观察属性并设置其他属性作为新值的响应，可以根据信号和操作来表达属性：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Creates a one-way binding so that self.createEnabled will be</span></div><div class="line"><span class="comment">// true whenever self.password and self.passwordConfirmation</span></div><div class="line"><span class="comment">// are equal.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// RAC() is a macro that makes the binding look nicer.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// +combineLatest:reduce: takes an array of signals, executes the block with the</span></div><div class="line"><span class="comment">// latest value from each signal whenever any of them changes, and returns a new</span></div><div class="line"><span class="comment">// RACSignal that sends the return value of that block as values.</span></div><div class="line">RAC(<span class="keyword">self</span>, createEnabled) = [RACSignal</div><div class="line">	combineLatest:@[ RACObserve(<span class="keyword">self</span>, password), RACObserve(<span class="keyword">self</span>, passwordConfirmation) ]</div><div class="line">	reduce:^(<span class="built_in">NSString</span> *password, <span class="built_in">NSString</span> *passwordConfirm) &#123;</div><div class="line">		<span class="keyword">return</span> @([passwordConfirm isEqualToString:password]);</div><div class="line">	&#125;];</div></pre></td></tr></table></figure></p>
+<p>信号可以随着时间的推移建立在任何流量的值上，而不仅仅是KVO。 例如，它们也可以表示按钮按压：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Logs a message whenever the button is pressed.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// RACCommand creates signals to represent UI actions. Each signal can</span></div><div class="line"><span class="comment">// represent a button press, for example, and have additional work associated</span></div><div class="line"><span class="comment">// with it.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// -rac_command is an addition to NSButton. The button will send itself on that</span></div><div class="line"><span class="comment">// command whenever it's pressed.</span></div><div class="line"><span class="keyword">self</span>.button.rac_command = [[RACCommand alloc] initWithSignalBlock:^(<span class="keyword">id</span> _) &#123;</div><div class="line">	<span class="built_in">NSLog</span>(<span class="string">@"button was pressed!"</span>);</div><div class="line">	<span class="keyword">return</span> [RACSignal empty];</div><div class="line">&#125;];</div></pre></td></tr></table></figure></p>
+<p>或者异步网络操作<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Hooks up a "Log in" button to log in over the network.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// This block will be run whenever the login command is executed, starting</span></div><div class="line"><span class="comment">// the login process.</span></div><div class="line"><span class="keyword">self</span>.loginCommand = [[RACCommand alloc] initWithSignalBlock:^(<span class="keyword">id</span> sender) &#123;</div><div class="line">	<span class="comment">// The hypothetical -logIn method returns a signal that sends a value when</span></div><div class="line">	<span class="comment">// the network request finishes.</span></div><div class="line">	<span class="keyword">return</span> [client logIn];</div><div class="line">&#125;];</div><div class="line"></div><div class="line"><span class="comment">// -executionSignals returns a signal that includes the signals returned from</span></div><div class="line"><span class="comment">// the above block, one for each time the command is executed.</span></div><div class="line">[<span class="keyword">self</span>.loginCommand.executionSignals subscribeNext:^(RACSignal *loginSignal) &#123;</div><div class="line">	<span class="comment">// Log a message whenever we log in successfully.</span></div><div class="line">	[loginSignal subscribeCompleted:^&#123;</div><div class="line">		<span class="built_in">NSLog</span>(<span class="string">@"Logged in successfully!"</span>);</div><div class="line">	&#125;];</div><div class="line">&#125;];</div><div class="line"></div><div class="line"><span class="comment">// Executes the login command when the button is pressed.</span></div><div class="line"><span class="keyword">self</span>.loginButton.rac_command = <span class="keyword">self</span>.loginCommand;</div></pre></td></tr></table></figure></p>
+<p>信号也可以表示定时器，其他UI事件或随时间变化的任何其他事件。</p>
+<p>使用信号进行异步操作可以通过链接和转换这些信号来构建更复杂的行为。 一组操作完成后，工作可以轻松触发：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Performs 2 network operations and logs a message to the console when they are</span></div><div class="line"><span class="comment">// both completed.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// +merge: takes an array of signals and returns a new RACSignal that passes</span></div><div class="line"><span class="comment">// through the values of all of the signals and completes when all of the</span></div><div class="line"><span class="comment">// signals complete.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// -subscribeCompleted: will execute the block when the signal completes.</span></div><div class="line">[[RACSignal</div><div class="line">	merge:@[ [client fetchUserRepos], [client fetchOrgRepos] ]]</div><div class="line">	subscribeCompleted:^&#123;</div><div class="line">		<span class="built_in">NSLog</span>(<span class="string">@"They're both done!"</span>);</div><div class="line">	&#125;];</div></pre></td></tr></table></figure>
+<p>可以链接信号以顺序执行异步操作，而不是使用块嵌套回调。 这类似于通常使用的期货和承诺：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Logs in the user, then loads any cached messages, then fetches the remaining</span></div><div class="line"><span class="comment">// messages from the server. After that's all done, logs a message to the</span></div><div class="line"><span class="comment">// console.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// The hypothetical -logInUser methods returns a signal that completes after</span></div><div class="line"><span class="comment">// logging in.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// -flattenMap: will execute its block whenever the signal sends a value, and</span></div><div class="line"><span class="comment">// returns a new RACSignal that merges all of the signals returned from the block</span></div><div class="line"><span class="comment">// into a single signal.</span></div><div class="line">[[[[client</div><div class="line">	logInUser]</div><div class="line">	flattenMap:^(User *user) &#123;</div><div class="line">		<span class="comment">// Return a signal that loads cached messages for the user.</span></div><div class="line">		<span class="keyword">return</span> [client loadCachedMessagesForUser:user];</div><div class="line">	&#125;]</div><div class="line">	flattenMap:^(<span class="built_in">NSArray</span> *messages) &#123;</div><div class="line">		<span class="comment">// Return a signal that fetches any remaining messages.</span></div><div class="line">		<span class="keyword">return</span> [client fetchMessagesAfterMessage:messages.lastObject];</div><div class="line">	&#125;]</div><div class="line">	subscribeNext:^(<span class="built_in">NSArray</span> *newMessages) &#123;</div><div class="line">		<span class="built_in">NSLog</span>(<span class="string">@"New messages: %@"</span>, newMessages);</div><div class="line">	&#125; completed:^&#123;</div><div class="line">		<span class="built_in">NSLog</span>(<span class="string">@"Fetched all messages."</span>);</div><div class="line">	&#125;];</div></pre></td></tr></table></figure></p>
+<p>RAC甚至可以很容易地绑定到异步操作的结果：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Creates a one-way binding so that self.imageView.image will be set as the user's</span></div><div class="line"><span class="comment">// avatar as soon as it's downloaded.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// The hypothetical -fetchUserWithUsername: method returns a signal which sends</span></div><div class="line"><span class="comment">// the user.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// -deliverOn: creates new signals that will do their work on other queues. In</span></div><div class="line"><span class="comment">// this example, it's used to move work to a background queue and then back to the main thread.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// -map: calls its block with each user that's fetched and returns a new</span></div><div class="line"><span class="comment">// RACSignal that sends values returned from the block.</span></div><div class="line">RAC(<span class="keyword">self</span>.imageView, image) = [[[[client</div><div class="line">	fetchUserWithUsername:<span class="string">@"joshaber"</span>]</div><div class="line">	deliverOn:[RACScheduler scheduler]]</div><div class="line">	map:^(User *user) &#123;</div><div class="line">		<span class="comment">// Download the avatar (this is done on a background queue).</span></div><div class="line">		<span class="keyword">return</span> [[<span class="built_in">NSImage</span> alloc] initWithContentsOfURL:user.avatarURL];</div><div class="line">	&#125;]</div><div class="line">	<span class="comment">// Now the assignment will be done on the main thread.</span></div><div class="line">	deliverOn:RACScheduler.mainThreadScheduler];</div></pre></td></tr></table></figure></p>
+<p>这表明RAC可以做些什么，但它并不能说明RAC如何强大。 很难从README大小的示例中欣赏RAC，但它可以以较少的状态，较少的样板，更好的代码局部性和更好的表达意图来编写代码。</p>
+<p>有关更多示例代码，请查看 <a href="https://github.com/AshFurrow/C-41" target="_blank" rel="external">C-41</a> 或 <a href="https://github.com/jspahrsummers/GroceryList" target="_blank" rel="external">GroceryList</a>，这是使用ReactiveObjC编写的真正的iOS应用程序。 有关RAC的其他信息，请参见此文件夹。</p>
+<h3 id="什么时候使用-ReactiveObjC-？"><a href="#什么时候使用-ReactiveObjC-？" class="headerlink" title="什么时候使用 ReactiveObjC ？"></a>什么时候使用 ReactiveObjC ？</h3><p>乍一看，ReactiveObjC非常抽象，很难理解如何将其应用于具体问题。</p>
+<p>以下是RAC擅长的一些用例。</p>
+<p>处理异步或事件驱动的数据源</p>
+<p>Cocoa编程的大部分重点是对用户事件或应用程序状态的更改做出反应。 处理这种事件的代码可能会很快变得非常复杂，像意大利面，有很多回调和状态变量来处理排序问题。</p>
+<p>实际上，与UI回调，网络响应和KVO通知相似的模式似乎与之相似。 RACSignal统一所有这些不同的API，以便它们可以组合在一起并以相同的方式进行操作。</p>
+<p>例如，以下代码：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> *ObservationContext = &amp;ObservationContext;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">	[<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line">	[LoginManager.sharedManager addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"loggingIn"</span> options:<span class="built_in">NSKeyValueObservingOptionInitial</span> context:&amp;ObservationContext];</div><div class="line">	[<span class="built_in">NSNotificationCenter</span>.defaultCenter addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(loggedOut:) name:UserDidLogOutNotification object:LoginManager.sharedManager];</div><div class="line"></div><div class="line">	[<span class="keyword">self</span>.usernameTextField addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(updateLogInButton) forControlEvents:<span class="built_in">UIControlEventEditingChanged</span>];</div><div class="line">	[<span class="keyword">self</span>.passwordTextField addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(updateLogInButton) forControlEvents:<span class="built_in">UIControlEventEditingChanged</span>];</div><div class="line">	[<span class="keyword">self</span>.logInButton addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(logInPressed:) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)dealloc &#123;</div><div class="line">	[LoginManager.sharedManager removeObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"loggingIn"</span> context:ObservationContext];</div><div class="line">	[<span class="built_in">NSNotificationCenter</span>.defaultCenter removeObserver:<span class="keyword">self</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)updateLogInButton &#123;</div><div class="line">	<span class="built_in">BOOL</span> textFieldsNonEmpty = <span class="keyword">self</span>.usernameTextField.text.length &gt; <span class="number">0</span> &amp;&amp; <span class="keyword">self</span>.passwordTextField.text.length &gt; <span class="number">0</span>;</div><div class="line">	<span class="built_in">BOOL</span> readyToLogIn = !LoginManager.sharedManager.isLoggingIn &amp;&amp; !<span class="keyword">self</span>.loggedIn;</div><div class="line">	<span class="keyword">self</span>.logInButton.enabled = textFieldsNonEmpty &amp;&amp; readyToLogIn;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">IBAction</span>)logInPressed:(<span class="built_in">UIButton</span> *)sender &#123;</div><div class="line">	[[LoginManager sharedManager]</div><div class="line">		logInWithUsername:<span class="keyword">self</span>.usernameTextField.text</div><div class="line">		password:<span class="keyword">self</span>.passwordTextField.text</div><div class="line">		success:^&#123;</div><div class="line">			<span class="keyword">self</span>.loggedIn = <span class="literal">YES</span>;</div><div class="line">		&#125; failure:^(<span class="built_in">NSError</span> *error) &#123;</div><div class="line">			[<span class="keyword">self</span> presentError:error];</div><div class="line">		&#125;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)loggedOut:(<span class="built_in">NSNotification</span> *)notification &#123;</div><div class="line">	<span class="keyword">self</span>.loggedIn = <span class="literal">NO</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span> *)change context:(<span class="keyword">void</span> *)context &#123;</div><div class="line">	<span class="keyword">if</span> (context == ObservationContext) &#123;</div><div class="line">		[<span class="keyword">self</span> updateLogInButton];</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		[<span class="keyword">super</span> observeValueForKeyPath:keyPath ofObject:object change:change context:context];</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>..可以在RAC中这样表达：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">	[<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line">	@weakify(<span class="keyword">self</span>);</div><div class="line"></div><div class="line">	RAC(<span class="keyword">self</span>.logInButton, enabled) = [RACSignal</div><div class="line">		combineLatest:@[</div><div class="line">			<span class="keyword">self</span>.usernameTextField.rac_textSignal,</div><div class="line">			<span class="keyword">self</span>.passwordTextField.rac_textSignal,</div><div class="line">			RACObserve(LoginManager.sharedManager, loggingIn),</div><div class="line">			RACObserve(<span class="keyword">self</span>, loggedIn)</div><div class="line">		] reduce:^(<span class="built_in">NSString</span> *username, <span class="built_in">NSString</span> *password, <span class="built_in">NSNumber</span> *loggingIn, <span class="built_in">NSNumber</span> *loggedIn) &#123;</div><div class="line">			<span class="keyword">return</span> @(username.length &gt; <span class="number">0</span> &amp;&amp; password.length &gt; <span class="number">0</span> &amp;&amp; !loggingIn.boolValue &amp;&amp; !loggedIn.boolValue);</div><div class="line">		&#125;];</div><div class="line"></div><div class="line">	[[<span class="keyword">self</span>.logInButton rac_signalForControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>] subscribeNext:^(<span class="built_in">UIButton</span> *sender) &#123;</div><div class="line">		@strongify(<span class="keyword">self</span>);</div><div class="line"></div><div class="line">		RACSignal *loginSignal = [LoginManager.sharedManager</div><div class="line">			logInWithUsername:<span class="keyword">self</span>.usernameTextField.text</div><div class="line">			password:<span class="keyword">self</span>.passwordTextField.text];</div><div class="line"></div><div class="line">			[loginSignal subscribeError:^(<span class="built_in">NSError</span> *error) &#123;</div><div class="line">				@strongify(<span class="keyword">self</span>);</div><div class="line">				[<span class="keyword">self</span> presentError:error];</div><div class="line">			&#125; completed:^&#123;</div><div class="line">				@strongify(<span class="keyword">self</span>);</div><div class="line">				<span class="keyword">self</span>.loggedIn = <span class="literal">YES</span>;</div><div class="line">			&#125;];</div><div class="line">	&#125;];</div><div class="line"></div><div class="line">	RAC(<span class="keyword">self</span>, loggedIn) = [[<span class="built_in">NSNotificationCenter</span>.defaultCenter</div><div class="line">		rac_addObserverForName:UserDidLogOutNotification object:<span class="literal">nil</span>]</div><div class="line">		mapReplace:@NO];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>链接依赖操作</p>
+<p>通常在网络请求中找到依赖关系，其中先前对服务器的请求需要在下一个请求之前完成，等等：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[client logInWithSuccess:^&#123;</div><div class="line">	[client loadCachedMessagesWithSuccess:^(<span class="built_in">NSArray</span> *messages) &#123;</div><div class="line">		[client fetchMessagesAfterMessage:messages.lastObject success:^(<span class="built_in">NSArray</span> *nextMessages) &#123;</div><div class="line">			<span class="built_in">NSLog</span>(<span class="string">@"Fetched all messages."</span>);</div><div class="line">		&#125; failure:^(<span class="built_in">NSError</span> *error) &#123;</div><div class="line">			[<span class="keyword">self</span> presentError:error];</div><div class="line">		&#125;];</div><div class="line">	&#125; failure:^(<span class="built_in">NSError</span> *error) &#123;</div><div class="line">		[<span class="keyword">self</span> presentError:error];</div><div class="line">	&#125;];</div><div class="line">&#125; failure:^(<span class="built_in">NSError</span> *error) &#123;</div><div class="line">	[<span class="keyword">self</span> presentError:error];</div><div class="line">&#125;];</div></pre></td></tr></table></figure></p>
+<p>ReactiveObjC使这种模式特别容易：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[[[[client logIn]</div><div class="line">	then:^&#123;</div><div class="line">		<span class="keyword">return</span> [client loadCachedMessages];</div><div class="line">	&#125;]</div><div class="line">	flattenMap:^(<span class="built_in">NSArray</span> *messages) &#123;</div><div class="line">		<span class="keyword">return</span> [client fetchMessagesAfterMessage:messages.lastObject];</div><div class="line">	&#125;]</div><div class="line">	subscribeError:^(<span class="built_in">NSError</span> *error) &#123;</div><div class="line">		[<span class="keyword">self</span> presentError:error];</div><div class="line">	&#125; completed:^&#123;</div><div class="line">		<span class="built_in">NSLog</span>(<span class="string">@"Fetched all messages."</span>);</div><div class="line">	&#125;];</div></pre></td></tr></table></figure></p>
+<p>平行独立工作</p>
+<p>并行处理独立数据集，然后将它们组合成最终结果在Cocoa中是微不足道的，通常涉及很多同步：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">__block <span class="built_in">NSArray</span> *databaseObjects;</div><div class="line">__block <span class="built_in">NSArray</span> *fileContents;</div><div class="line"></div><div class="line"><span class="built_in">NSOperationQueue</span> *backgroundQueue = [[<span class="built_in">NSOperationQueue</span> alloc] init];</div><div class="line"><span class="built_in">NSBlockOperation</span> *databaseOperation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</div><div class="line">	databaseObjects = [databaseClient fetchObjectsMatchingPredicate:predicate];</div><div class="line">&#125;];</div><div class="line"></div><div class="line"><span class="built_in">NSBlockOperation</span> *filesOperation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</div><div class="line">	<span class="built_in">NSMutableArray</span> *filesInProgress = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">	<span class="keyword">for</span> (<span class="built_in">NSString</span> *path <span class="keyword">in</span> files) &#123;</div><div class="line">		[filesInProgress addObject:[<span class="built_in">NSData</span> dataWithContentsOfFile:path]];</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fileContents = [filesInProgress <span class="keyword">copy</span>];</div><div class="line">&#125;];</div><div class="line"></div><div class="line"><span class="built_in">NSBlockOperation</span> *finishOperation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</div><div class="line">	[<span class="keyword">self</span> finishProcessingDatabaseObjects:databaseObjects fileContents:fileContents];</div><div class="line">	<span class="built_in">NSLog</span>(<span class="string">@"Done processing"</span>);</div><div class="line">&#125;];</div><div class="line"></div><div class="line">[finishOperation addDependency:databaseOperation];</div><div class="line">[finishOperation addDependency:filesOperation];</div><div class="line">[backgroundQueue addOperation:databaseOperation];</div><div class="line">[backgroundQueue addOperation:filesOperation];</div><div class="line">[backgroundQueue addOperation:finishOperation];</div></pre></td></tr></table></figure></p>
+<p>上述代码可以通过简单的组合信号进行清理和优化：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">RACSignal *databaseSignal = [[databaseClient</div><div class="line">	fetchObjectsMatchingPredicate:predicate]</div><div class="line">	subscribeOn:[RACScheduler scheduler]];</div><div class="line"></div><div class="line">RACSignal *fileSignal = [RACSignal startEagerlyWithScheduler:[RACScheduler scheduler] block:^(<span class="keyword">id</span>&lt;RACSubscriber&gt; subscriber) &#123;</div><div class="line">	<span class="built_in">NSMutableArray</span> *filesInProgress = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">	<span class="keyword">for</span> (<span class="built_in">NSString</span> *path <span class="keyword">in</span> files) &#123;</div><div class="line">		[filesInProgress addObject:[<span class="built_in">NSData</span> dataWithContentsOfFile:path]];</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	[subscriber sendNext:[filesInProgress <span class="keyword">copy</span>]];</div><div class="line">	[subscriber sendCompleted];</div><div class="line">&#125;];</div><div class="line"></div><div class="line">[[RACSignal</div><div class="line">	combineLatest:@[ databaseSignal, fileSignal ]</div><div class="line">	reduce:^ <span class="keyword">id</span> (<span class="built_in">NSArray</span> *databaseObjects, <span class="built_in">NSArray</span> *fileContents) &#123;</div><div class="line">		[<span class="keyword">self</span> finishProcessingDatabaseObjects:databaseObjects fileContents:fileContents];</div><div class="line">		<span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">	&#125;]</div><div class="line">	subscribeCompleted:^&#123;</div><div class="line">		<span class="built_in">NSLog</span>(<span class="string">@"Done processing"</span>);</div><div class="line">	&#125;];</div></pre></td></tr></table></figure></p>
+<p>简化集合转换</p>
+<p>高阶函数 like map, filter, fold/reduce are Foundation 中非常严重确实, 导致像这样的循环集中代码：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSMutableArray</span> *results = [<span class="built_in">NSMutableArray</span> array];</div><div class="line"><span class="keyword">for</span> (<span class="built_in">NSString</span> *str <span class="keyword">in</span> strings) &#123;</div><div class="line">	<span class="keyword">if</span> (str.length &lt; <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">continue</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="built_in">NSString</span> *newString = [str stringByAppendingString:<span class="string">@"foobar"</span>];</div><div class="line">	[results addObject:newString];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>RACSequence允许任何Cocoa集合以统一和简明的方式被操作：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">RACSequence *results = [[strings.rac_sequence</div><div class="line">	filter:^ <span class="built_in">BOOL</span> (<span class="built_in">NSString</span> *str) &#123;</div><div class="line">		<span class="keyword">return</span> str.length &gt;= <span class="number">2</span>;</div><div class="line">	&#125;]</div><div class="line">	map:^(<span class="built_in">NSString</span> *str) &#123;</div><div class="line">		<span class="keyword">return</span> [str stringByAppendingString:<span class="string">@"foobar"</span>];</div><div class="line">	&#125;];</div></pre></td></tr></table></figure></p>
+<h3 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h3><p>ReactiveObjC supports OS X 10.8+ and iOS 8.0+.</p>
+<h3 id="Importing-ReactiveObjC"><a href="#Importing-ReactiveObjC" class="headerlink" title="Importing ReactiveObjC"></a>Importing ReactiveObjC</h3><p>要将RAC添加到应用程序中：</p>
+<ol>
+<li>添加 ReactiveObjC  仓库为你应用仓库的子模块</li>
+<li>运行 git 子模块 update–init –recursive 在 ReactiveObjC  文件夹内</li>
+<li>将 ReactiveObjC.xcodeproj 拖放到应用程序的Xcode项目或工作区中。</li>
+<li>在 你应用 target 的 “Build Phases” 选项卡 , 添加 RAC 到 add “Link Binary With Libraries” phase.</li>
+<li>Add ReactiveObjC.framework. RAC must also be added to any “Copy Frameworks” build phase. If you don’t already have one, simply add a “Copy Files”       build phase and target the “Frameworks” destination.</li>
+<li>Add “$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts/include” $(inherited) to the “Header Search Paths” build setting (this is only necessary for archive builds, but it has no negative effect otherwise).</li>
+<li>For iOS targets, add -ObjC to the “Other Linker Flags” build setting.</li>
+<li>If you added RAC to a project (not a workspace), you will also need to add the appropriate RAC target to the “Target Dependencies” of your application.</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/04/A-Swift-Tour/" rel="next" title="A Swift Tour">
+                <i class="fa fa-chevron-left"></i> A Swift Tour
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="boitx" />
+          <p class="site-author-name" itemprop="name">boitx</p>
+           
+              <p class="site-description motion-element" itemprop="description">没有技术的宅，就是不要脸</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候使用-ReactiveObjC-？"><span class="nav-number">1.</span> <span class="nav-text">什么时候使用 ReactiveObjC ？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统要求"><span class="nav-number">2.</span> <span class="nav-text">系统要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Importing-ReactiveObjC"><span class="nav-number">3.</span> <span class="nav-text">Importing ReactiveObjC</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">boitx</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
