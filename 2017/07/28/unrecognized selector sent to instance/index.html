@@ -87,21 +87,22 @@
 
 
 
-<meta name="description" content="检测从后台线程非法使用AppKit，UIKit和其他API。
-重所周知，在后台线程更新UI会导致 App crash，更坑的是有时候运行很正常。公司项目有时候多个人同时写，难免会有不少坑。Xcode9支持主线程检测，后台线程更新UI，运行的时候直接就会检查出来。">
+<meta name="description" content="程序刚才运行还好好的，怎么突然间就崩溃了？打全局断点也没用，崩溃信息什么鬼东西？拒绝懵逼，从我做起">
 <meta property="og:type" content="article">
-<meta property="og:title" content="主线程检查器">
-<meta property="og:url" content="http://yoursite.com/2017/06/18/main-thread-cheacker/index.html">
+<meta property="og:title" content="unrecognized selector sent to instance 快速定位">
+<meta property="og:url" content="http://yoursite.com/2017/07/28/unrecognized selector sent to instance/index.html">
 <meta property="og:site_name" content="boitx">
-<meta property="og:description" content="检测从后台线程非法使用AppKit，UIKit和其他API。
-重所周知，在后台线程更新UI会导致 App crash，更坑的是有时候运行很正常。公司项目有时候多个人同时写，难免会有不少坑。Xcode9支持主线程检测，后台线程更新UI，运行的时候直接就会检查出来。">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006sfeDHly1fgophusb3uj31q40k8n2n.jpg">
-<meta property="og:updated_time" content="2017-06-17T17:23:50.000Z">
+<meta property="og:description" content="程序刚才运行还好好的，怎么突然间就崩溃了？打全局断点也没用，崩溃信息什么鬼东西？拒绝懵逼，从我做起">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006mtpRVly1fi1ag4sli0j31lq17otu1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006mtpRVly1fi1alh5j0uj30fy0batau.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006mtpRVly1fi1amx8s8zj30p4098adl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006mtpRVly1fi1ao0p05mj31e60v4kc8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006mtpRVly1fi1apeugbsj31i00pqaug.jpg">
+<meta property="og:updated_time" content="2017-07-30T17:46:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="主线程检查器">
-<meta name="twitter:description" content="检测从后台线程非法使用AppKit，UIKit和其他API。
-重所周知，在后台线程更新UI会导致 App crash，更坑的是有时候运行很正常。公司项目有时候多个人同时写，难免会有不少坑。Xcode9支持主线程检测，后台线程更新UI，运行的时候直接就会检查出来。">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006sfeDHly1fgophusb3uj31q40k8n2n.jpg">
+<meta name="twitter:title" content="unrecognized selector sent to instance 快速定位">
+<meta name="twitter:description" content="程序刚才运行还好好的，怎么突然间就崩溃了？打全局断点也没用，崩溃信息什么鬼东西？拒绝懵逼，从我做起">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006mtpRVly1fi1ag4sli0j31lq17otu1.jpg">
 
 
 
@@ -129,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/18/main-thread-cheacker/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/28/unrecognized selector sent to instance/"/>
 
 
 
 
 
-  <title> 主线程检查器 | boitx </title>
+  <title> unrecognized selector sent to instance 快速定位 | boitx </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -264,7 +265,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/18/main-thread-cheacker/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/28/unrecognized selector sent to instance/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="boitx">
@@ -285,7 +286,7 @@
             
             
               
-                主线程检查器
+                unrecognized selector sent to instance 快速定位
               
             
           </h1>
@@ -300,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-18T00:47:44+08:00">
-                2017-06-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-28T14:23:56+08:00">
+                2017-07-28
               </time>
             
 
@@ -336,20 +337,21 @@
       
 
       
-        <p>检测从后台线程非法使用AppKit，UIKit和其他API。</p>
-<p>重所周知，在后台线程更新UI会导致 App crash，更坑的是有时候运行很正常。公司项目有时候多个人同时写，难免会有不少坑。Xcode9支持主线程检测，后台线程更新UI，运行的时候直接就会检查出来。<br><a id="more"></a></p>
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>主线程检查器是一个单独的工具：检查 Swift 和 C 后台线程有没有非法使用AppKit，UIKit和其他API。<br>在主线程以外的线程上更新UI是一个常见的错误，可能导致UI更新错误，视觉缺陷，数据损坏和崩溃。</p>
-<h3 id="主线程检查器是如何工作的"><a href="#主线程检查器是如何工作的" class="headerlink" title="主线程检查器是如何工作的"></a>主线程检查器是如何工作的</h3><p>在应用程序启动时,只能在主线程调用的方法会被主线程检查器动态实现为预检查版本。已知用于后台线程安全的方法被排除在该检查之外。</p>
-<blockquote>
-<p>注意</p>
-<p>与其他代码诊断工具不同，主线程检查器不需要重新编译，可以与现有的二进制文件一起使用。 您可以通过注入位于/Applications/Xcode.app/Contents/Developer/usr/lib/libMainThreadChecker.dylib的动态库文件，在没有Xcode调试器的macOS应用程序（如连续集成系统）上运行它。</p>
-<h3 id="性能影响"><a href="#性能影响" class="headerlink" title="性能影响"></a>性能影响</h3><p>主线程检查器的性能影响很小，占用1-2％的CPU开销和额外的进程启动时间&lt;0.1秒。</p>
+        <blockquote>
+<p>程序刚才运行还好好的，怎么突然间就崩溃了？<br>打全局断点也没用，崩溃信息什么鬼东西？<br>拒绝懵逼，从我做起<br><a id="more"></a></p>
+<h2 id="先看代码？"><a href="#先看代码？" class="headerlink" title="先看代码？"></a>先看代码？</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSArray</span> *imgArr = @[<span class="string">@"123"</span>];</div><div class="line">    <span class="built_in">UIButton</span> *btn  = [<span class="built_in">UIButton</span> buttonWithType:<span class="built_in">UIButtonTypeCustom</span>];</div><div class="line">    btn.frame = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>,<span class="number">100</span>, <span class="number">100</span>);</div><div class="line">    [btn setImage:imgArr[<span class="number">0</span>] forState:<span class="built_in">UIControlStateNormal</span>];</div><div class="line">    [<span class="keyword">self</span>.view addSubview:btn];</div><div class="line">    btn.center = <span class="keyword">self</span>.view.center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </blockquote>
-<p>由于其最小的性能开销，当您使用Xcode调试器运行应用程序时，主线程检查器将自动启用。</p>
-<h3 id="网络请求之后更新UI"><a href="#网络请求之后更新UI" class="headerlink" title="网络请求之后更新UI"></a>网络请求之后更新UI</h3><p>耗时任务比如网络请求通常在后台执行，并且提供一个完成回调来处理操作。尝试从完成回调读取或更新UI可能会导致问题。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006sfeDHly1fgophusb3uj31q40k8n2n.jpg" alt=""></p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>使用GCD在主线程更新UI。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let task = URLSession.shared.dataTask(with: url) &#123; (data, response, error) <span class="keyword">in</span></div><div class="line">   <span class="keyword">if</span> let data = data &#123;</div><div class="line">      DispatchQueue.main.async &#123; <span class="comment">// Correct</span></div><div class="line">         <span class="keyword">self</span>.label.text = <span class="string">"\(data.count) bytes downloaded"</span></div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">task.resume()</div></pre></td></tr></table></figure>
+<p>说明：这是新建的项目，只有这几行代码是新加的。</p>
+<h2 id="崩溃画面太美，我不敢看？"><a href="#崩溃画面太美，我不敢看？" class="headerlink" title="崩溃画面太美，我不敢看？"></a>崩溃画面太美，我不敢看？</h2><p><img src="http://ww1.sinaimg.cn/large/006mtpRVly1fi1ag4sli0j31lq17otu1.jpg" alt="-w=500"></p>
+<p>错误信息缩略一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-[__NSCFConstantString size]: unrecognized selector sent to instance 0x104601068&apos;</div></pre></td></tr></table></figure></p>
+<p>谁来告诉我，这个提示和有问题的代码有屁的关联？</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
+<li>添加符号断点：-[NSObject(NSObject) doesNotRecognizeSelector:]（在哪崩溃停在哪，别崩溃到main.m中）<br><img src="http://ww1.sinaimg.cn/large/006mtpRVly1fi1alh5j0uj30fy0batau.jpg" alt="-w=300"><br><img src="http://ww1.sinaimg.cn/large/006mtpRVly1fi1amx8s8zj30p4098adl.jpg" alt="-w=300"></li>
+<li>查看崩溃线程调用信息：<br><img src="http://ww1.sinaimg.cn/large/006mtpRVly1fi1ao0p05mj31e60v4kc8.jpg" alt="-w=500"><br>这个我也懵逼，谁能看得懂，但是看到下面就明白了<br><img src="http://ww1.sinaimg.cn/large/006mtpRVly1fi1apeugbsj31i00pqaug.jpg" alt="-w=500"><br>看到那个方法没： -[UIButton imageRectForContentRect:],这里用到了CGRect,CGRect 由 CGPoint 和 CGSize 组成。image size 出问题，肯定是UIButton 的 image 设置有问题。</li>
+</ol>
+<h2 id="错误原因："><a href="#错误原因：" class="headerlink" title="错误原因："></a>错误原因：</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *imgArr = @[<span class="string">@"123"</span>];</div><div class="line"><span class="built_in">UIButton</span> *btn  = [<span class="built_in">UIButton</span> buttonWithType:<span class="built_in">UIButtonTypeCustom</span>];</div><div class="line">[btn setImage:imgArr[<span class="number">0</span>] forState:<span class="built_in">UIControlStateNormal</span>];</div></pre></td></tr></table></figure>
+<p>字符串当成UIImage赋值，肯定出错。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>解决问题再牛逼，粗心大意，累的像傻逼。</p>
 
       
     </div>
@@ -386,8 +388,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/17/Xcode 9.0新特性/" rel="next" title="xcode9.0 新特性">
-                <i class="fa fa-chevron-left"></i> xcode9.0 新特性
+              <a href="/2017/07/24/UICollectionView/" rel="next" title="UICollectionView 看这个就够了">
+                <i class="fa fa-chevron-left"></i> UICollectionView 看这个就够了
               </a>
             
           </div>
@@ -396,8 +398,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/19/core-text/" rel="prev" title="core_text">
-                core_text <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/29/UIButtonMargin/" rel="prev" title="UIButton 调整间距">
+                UIButton 调整间距 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -509,7 +511,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主线程检查器是如何工作的"><span class="nav-number">2.</span> <span class="nav-text">主线程检查器是如何工作的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能影响"><span class="nav-number">3.</span> <span class="nav-text">性能影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络请求之后更新UI"><span class="nav-number">4.</span> <span class="nav-text">网络请求之后更新UI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">5.</span> <span class="nav-text">解决方案</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先看代码？"><span class="nav-number">1.</span> <span class="nav-text">先看代码？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#崩溃画面太美，我不敢看？"><span class="nav-number">2.</span> <span class="nav-text">崩溃画面太美，我不敢看？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误原因："><span class="nav-number">4.</span> <span class="nav-text">错误原因：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
             
 
           </div>

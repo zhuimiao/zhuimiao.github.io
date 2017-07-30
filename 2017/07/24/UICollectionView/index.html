@@ -1,0 +1,710 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="自定义单元格、常用展示方式瀑布流展示添加分组头视图 、 设置头视图悬停">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UICollectionView 看这个就够了">
+<meta property="og:url" content="http://yoursite.com/2017/07/24/UICollectionView/index.html">
+<meta property="og:site_name" content="boitx">
+<meta property="og:description" content="自定义单元格、常用展示方式瀑布流展示添加分组头视图 、 设置头视图悬停">
+<meta property="og:image" content="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/1.png">
+<meta property="og:image" content="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/2.png">
+<meta property="og:image" content="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/3.png">
+<meta property="og:image" content="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/4.png">
+<meta property="og:updated_time" content="2017-07-30T17:52:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UICollectionView 看这个就够了">
+<meta name="twitter:description" content="自定义单元格、常用展示方式瀑布流展示添加分组头视图 、 设置头视图悬停">
+<meta name="twitter:image" content="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/24/UICollectionView/"/>
+
+
+
+
+
+  <title> UICollectionView 看这个就够了 | boitx </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">boitx</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">enjoy coding</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/24/UICollectionView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="boitx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="boitx">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                UICollectionView 看这个就够了
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T14:23:56+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>自定义单元格、常用展示方式<br>瀑布流展示<br>添加分组头视图 、 设置头视图悬停<br><a id="more"></a></p>
+<h2 id="先看一下效果图"><a href="#先看一下效果图" class="headerlink" title="先看一下效果图"></a>先看一下效果图</h2><h3 id="自定义单元格、常用展示方式："><a href="#自定义单元格、常用展示方式：" class="headerlink" title="自定义单元格、常用展示方式："></a>自定义单元格、常用展示方式：</h3><p><img src="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/1.png" alt="-w500"></p>
+<h3 id="瀑布流展示："><a href="#瀑布流展示：" class="headerlink" title="瀑布流展示："></a>瀑布流展示：</h3><p><img src="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/2.png" alt="-w500"></p>
+<h3 id="添加分组头视图："><a href="#添加分组头视图：" class="headerlink" title="添加分组头视图："></a>添加分组头视图：</h3><p><img src="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/3.png" alt="-w500"></p>
+<h3 id="设置头视图悬停："><a href="#设置头视图悬停：" class="headerlink" title="设置头视图悬停："></a>设置头视图悬停：</h3><p><img src="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/4.png" alt="-w500"></p>
+</blockquote>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="自定义单元格"><a href="#自定义单元格" class="headerlink" title="自定义单元格"></a>自定义单元格</h3><h4 id="CustomCell-h"><a href="#CustomCell-h" class="headerlink" title="CustomCell.h"></a>CustomCell.h</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CustomCell</span> : <span class="title">UICollectionViewCell</span></span></div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>) <span class="built_in">NSString</span> *imgName;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<h4 id="CustomCell-m"><a href="#CustomCell-m" class="headerlink" title="CustomCell.m"></a>CustomCell.m</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"CustomCell.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CustomCell</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UIImageView</span> *imgV;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CustomCell</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">instancetype</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame]) &#123;</div><div class="line">        <span class="keyword">self</span>.backgroundColor = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line">        <span class="keyword">self</span>.imgV = [[<span class="built_in">UIImageView</span> alloc]initWithFrame:<span class="keyword">self</span>.bounds];</div><div class="line">        <span class="keyword">self</span>.imgV.contentMode = <span class="built_in">UIViewContentModeScaleAspectFit</span>;</div><div class="line">        <span class="keyword">self</span>.imgV.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"379.jpg"</span>];</div><div class="line">        [<span class="keyword">self</span>.contentView addSubview:<span class="keyword">self</span>.imgV];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setImgName:(<span class="built_in">NSString</span> *)imgName</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> ([_imgName isEqualToString:imgName]) <span class="keyword">return</span>;</div><div class="line">    _imgName = imgName;</div><div class="line">    <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:imgName];</div><div class="line">    <span class="keyword">self</span>.imgV.image = image;</div><div class="line">    <span class="comment">// cell复用时重新设置高度</span></div><div class="line">    <span class="keyword">if</span> (image) &#123;</div><div class="line">        <span class="built_in">CGFloat</span> height = <span class="keyword">self</span>.frame.size.width/image.size.width * image.size.height;</div><div class="line">        <span class="keyword">self</span>.frame = <span class="built_in">CGRectMake</span>(<span class="keyword">self</span>.frame.origin.x</div><div class="line">                                , <span class="keyword">self</span>.frame.origin.y,</div><div class="line">                                <span class="keyword">self</span>.frame.size.width,</div><div class="line">                                height);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<h3 id="常用展示方式"><a href="#常用展示方式" class="headerlink" title="常用展示方式"></a>常用展示方式</h3><p>思路：</p>
+<ol>
+<li>设置布局 （UICollectionView 的 上下左右内间距）</li>
+<li>设置布局  cell 间的距离 （不用以为一行cell就是一个section，完全可以多行只是一个section）</li>
+<li>设置布局  cell 的 size</li>
+<li>设置代理方法： 返回多少个cell， 返回cell<h4 id="NormalController-h"><a href="#NormalController-h" class="headerlink" title="NormalController.h"></a>NormalController.h</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NormalController</span> : <span class="title">UIViewController</span></span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="NormalController-m"><a href="#NormalController-m" class="headerlink" title="NormalController.m"></a>NormalController.m</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#define kNavBar_H 64</span></div><div class="line"><span class="meta">#define kScreen_W [UIScreen mainScreen].bounds.size.width</span></div><div class="line"><span class="meta">#define kScreen_H [UIScreen mainScreen].bounds.size.height</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"NormalController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"CustomCell.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NormalController</span> ()&lt;<span class="title">UICollectionViewDelegate</span>,<span class="title">UICollectionViewDataSource</span>&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UICollectionView</span> *collectionView;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="built_in">NSInteger</span> columnCount = <span class="number">2</span>;           <span class="comment">// 列数</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">CGFloat</span>  itemSpace = <span class="number">10</span>;             <span class="comment">//cell 间的间距</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">CGFloat</span>  edgeTop = <span class="number">10</span>;               <span class="comment">//collectionView 上内间距</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">CGFloat</span>  edgeLeft = <span class="number">20</span>;              <span class="comment">//collectionView 左右内间距</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">CGFloat</span>  edgeBottom = <span class="number">10</span>;            <span class="comment">//collectionView 下内间距</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">CGFloat</span>  edgeRight = <span class="number">20</span>;             <span class="comment">//collectionView 左右内间距</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> *cellIdentifi = <span class="string">@"CustomCell"</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NormalController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="keyword">self</span>.automaticallyAdjustsScrollViewInsets = <span class="literal">NO</span>;</div><div class="line">    [<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.collectionView];</div><div class="line">    <span class="keyword">self</span>.view.backgroundColor = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (<span class="built_in">UICollectionView</span> *)collectionView</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (_collectionView == <span class="literal">nil</span>) &#123;</div><div class="line">        <span class="built_in">UICollectionViewFlowLayout</span> *flowLayout = [[<span class="built_in">UICollectionViewFlowLayout</span> alloc]init];</div><div class="line">        flowLayout.minimumInteritemSpacing = itemSpace;</div><div class="line">        flowLayout.sectionInset = <span class="built_in">UIEdgeInsetsMake</span>(edgeTop, edgeLeft, edgeBottom, edgeLeft);</div><div class="line">        <span class="built_in">CGFloat</span> itemW = (kScreen_W - edgeLeft - edgeRight - (columnCount - <span class="number">1</span>)*itemSpace)/columnCount;</div><div class="line">        <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"tuigirl-074-1.jpg"</span>];</div><div class="line">        <span class="built_in">CGFloat</span> itemH = itemW * image.size.height/image.size.width;</div><div class="line">        flowLayout.itemSize = <span class="built_in">CGSizeMake</span>(itemW, itemH);</div><div class="line">        </div><div class="line">        _collectionView = [[<span class="built_in">UICollectionView</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, kNavBar_H, kScreen_W, kScreen_H - kNavBar_H) collectionViewLayout:flowLayout];</div><div class="line">        _collectionView.showsVerticalScrollIndicator = <span class="literal">NO</span>;</div><div class="line">        _collectionView.delegate = <span class="keyword">self</span>;</div><div class="line">        _collectionView.dataSource = <span class="keyword">self</span>;</div><div class="line">        [_collectionView registerClass:[CustomCell <span class="keyword">class</span>] forCellWithReuseIdentifier:cellIdentifi];</div><div class="line">        _collectionView.backgroundColor = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> _collectionView;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">NSInteger</span>)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView numberOfItemsInSection:(<span class="built_in">NSInteger</span>)section</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">40</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">NSInteger</span>)numberOfSectionsInCollectionView:(<span class="built_in">UICollectionView</span> *)collectionView</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(<span class="built_in">UICollectionViewCell</span> *)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView cellForItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</div><div class="line">&#123;</div><div class="line">    CustomCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifi forIndexPath:indexPath];</div><div class="line">    cell.imgName = <span class="string">@"tuigirl-074-1.jpg"</span>;</div><div class="line">    <span class="keyword">return</span> cell;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<h3 id="瀑布流"><a href="#瀑布流" class="headerlink" title="瀑布流"></a>瀑布流</h3><p>瀑布流展示需要自定义 UICollectionViewFlowLayout<br>实现思路：</p>
+<ol>
+<li>设置布局 （UICollectionView 的 上下左右内间距）</li>
+<li>设置布局  cell 间的距离 （不用以为一行cell就是一个section，完全可以多行只是一个section）</li>
+<li>设置布局  一共有几列 （到这里就可以计算出 cell 的宽度）</li>
+<li>获取所有 cell 的高度：（这个容易算，cell 宽度固定，真实高度等比例）</li>
+<li>调整所有 cell 的frame: （添加cell 的顺序是固定的，根据高低调整item的水平位置）<br>推荐参考这篇博客：<a href="http://www.jianshu.com/p/126bfc28c400" target="_blank" rel="external">http://www.jianshu.com/p/126bfc28c400</a></li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UICollectionView</span> *)collectionView</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (_collectionView == <span class="literal">nil</span>) &#123;</div><div class="line">        WaterfallLayout *flowLayout = [[WaterfallLayout alloc]init];</div><div class="line">        flowLayout.delegate = <span class="keyword">self</span>;</div><div class="line">        _collectionView = [[<span class="built_in">UICollectionView</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, kNavBar_H, kScreen_W, kScreen_H - kNavBar_H) collectionViewLayout:flowLayout];</div><div class="line">        _collectionView.showsVerticalScrollIndicator = <span class="literal">NO</span>;</div><div class="line">        _collectionView.delegate = <span class="keyword">self</span>;</div><div class="line">        _collectionView.dataSource = <span class="keyword">self</span>;</div><div class="line">        [_collectionView registerClass:[CustomCell <span class="keyword">class</span>] forCellWithReuseIdentifier:cellIdentifi];</div><div class="line">        _collectionView.backgroundColor = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> _collectionView;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- ( <span class="built_in">UICollectionViewCell</span> *) collectionView:( <span class="built_in">UICollectionView</span> *)collectionView cellForItemAtIndexPath:( <span class="built_in">NSIndexPath</span> *)indexPath &#123;</div><div class="line">    CustomCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifi forIndexPath:indexPath];</div><div class="line">    cell.imgName = <span class="keyword">self</span>.dataArray[indexPath.row];</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> cell;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">NSInteger</span>) collectionView:( <span class="built_in">UICollectionView</span> *)collectionView numberOfItemsInSection:(<span class="built_in">NSInteger</span>)section &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.dataArray.count;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">NSInteger</span>)numberOfSectionsInCollectionView:(<span class="built_in">UICollectionView</span> *)collectionView</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#pragma mark - WaterfallLayoutDelegate</span></div><div class="line"></div><div class="line">- (<span class="built_in">CGFloat</span>)rowMarginInWaterFlowLayout:(WaterfallLayout *)waterFlowLayout</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> itemSpace;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">CGFloat</span>)columMarginInWaterFlowLayout:(WaterfallLayout *)waterFlowLayout</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> itemSpace;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">UIEdgeInsets</span>)edgeInsetInWaterFlowLayout:(WaterfallLayout *)waterFlowLayout</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">UIEdgeInsetsMake</span>(edgeTop, edgeLeft, edgeBottom, edgeRight);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">NSInteger</span>)cloumnCountInWaterFlowLayout:(WaterfallLayout *)waterFlowLayout</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> columnCount;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">CGFloat</span>)waterfallLayout:(WaterfallLayout *)waterFlowLayout heightForRowAtIndex:(<span class="built_in">NSInteger</span>)index itemWidth:(<span class="built_in">CGFloat</span>)width</div><div class="line">&#123;</div><div class="line">    <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="keyword">self</span>.dataArray[index]];</div><div class="line">    <span class="keyword">return</span> width / image.size.width * image.size.height ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="分组头视图"><a href="#分组头视图" class="headerlink" title="分组头视图"></a>分组头视图</h3><p>实现步骤：</p>
+<ol>
+<li>collectionView 注册 registerClass: forSupplementaryViewOfKind: withReuseIdentifier:</li>
+<li>代理方法返回size：collectionView: layout: referenceSizeForHeaderInSection:</li>
+<li>代理方法返回view：collectionView: viewForSupplementaryElementOfKind: atIndexPath:</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[_collectionView registerClass:[<span class="built_in">UICollectionReusableView</span> <span class="keyword">class</span>] forSupplementaryViewOfKind:<span class="built_in">UICollectionElementKindSectionHeader</span> withReuseIdentifier:<span class="string">@"UICollectionReusableView"</span>];</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-(<span class="built_in">CGSize</span>)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView layout:(<span class="built_in">UICollectionViewLayout</span> *)collectionViewLayout referenceSizeForHeaderInSection:(<span class="built_in">NSInteger</span>)section&#123;</div><div class="line">        <span class="built_in">CGSize</span> size=&#123;kScreen_W,<span class="number">40</span>&#125;;</div><div class="line">        <span class="keyword">return</span> size;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">UICollectionReusableView</span> *)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView viewForSupplementaryElementOfKind:(<span class="built_in">NSString</span> *)kind atIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</div><div class="line">&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> ([kind isEqualToString:<span class="built_in">UICollectionElementKindSectionHeader</span>]) &#123;</div><div class="line">        <span class="built_in">UICollectionReusableView</span> *header=[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:<span class="string">@"UICollectionReusableView"</span> forIndexPath:indexPath];</div><div class="line">        <span class="built_in">NSString</span> *title =[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"美女图: %ld"</span>,indexPath.section];</div><div class="line">        [header addSubview: [<span class="keyword">self</span> createHeadViewWithTitle:title]];</div><div class="line">        <span class="keyword">return</span> header;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>tips: 这里有个坑，如果设置了size，没有返回分组头 view 会崩溃。</p>
+<h3 id="设置头视图悬停"><a href="#设置头视图悬停" class="headerlink" title="设置头视图悬停"></a>设置头视图悬停</h3><p>一行代码搞定：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flowLayout.sectionHeadersPinToVisibleBounds = <span class="literal">YES</span>;</div></pre></td></tr></table></figure>
+<h2 id="下载代码"><a href="#下载代码" class="headerlink" title="下载代码"></a><a href="http://boitx.org/ios/UICollectionView%20%E7%9C%8B%E8%BF%99%E4%B8%AA%E5%B0%B1%E5%A4%9F%E4%BA%86/UICollectionView.zip" target="_blank" rel="external">下载代码</a></h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/13/mysql-stored-procedures/" rel="next" title="mysql-stored-procedures">
+                <i class="fa fa-chevron-left"></i> mysql-stored-procedures
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/28/unrecognized selector sent to instance/" rel="prev" title="unrecognized selector sent to instance 快速定位">
+                unrecognized selector sent to instance 快速定位 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="boitx" />
+          <p class="site-author-name" itemprop="name">boitx</p>
+           
+              <p class="site-description motion-element" itemprop="description">没有技术的宅，就是不要脸</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先看一下效果图"><span class="nav-number">1.</span> <span class="nav-text">先看一下效果图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义单元格、常用展示方式："><span class="nav-number">1.1.</span> <span class="nav-text">自定义单元格、常用展示方式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#瀑布流展示："><span class="nav-number">1.2.</span> <span class="nav-text">瀑布流展示：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加分组头视图："><span class="nav-number">1.3.</span> <span class="nav-text">添加分组头视图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置头视图悬停："><span class="nav-number">1.4.</span> <span class="nav-text">设置头视图悬停：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义单元格"><span class="nav-number">2.1.</span> <span class="nav-text">自定义单元格</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CustomCell-h"><span class="nav-number">2.1.1.</span> <span class="nav-text">CustomCell.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CustomCell-m"><span class="nav-number">2.1.2.</span> <span class="nav-text">CustomCell.m</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用展示方式"><span class="nav-number">2.2.</span> <span class="nav-text">常用展示方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NormalController-h"><span class="nav-number">2.2.1.</span> <span class="nav-text">NormalController.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NormalController-m"><span class="nav-number">2.2.2.</span> <span class="nav-text">NormalController.m</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#瀑布流"><span class="nav-number">2.3.</span> <span class="nav-text">瀑布流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组头视图"><span class="nav-number">2.4.</span> <span class="nav-text">分组头视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置头视图悬停"><span class="nav-number">2.5.</span> <span class="nav-text">设置头视图悬停</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载代码"><span class="nav-number">3.</span> <span class="nav-text">下载代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">boitx</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
